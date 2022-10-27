@@ -1,7 +1,8 @@
 import {    Column, 
     Entity, 
     OneToMany, 
-    PrimaryGeneratedColumn 
+    PrimaryGeneratedColumn, 
+    Unique
 } from "typeorm";
 import { Apontamento } from "./Apontamento";
 
@@ -11,16 +12,16 @@ export class User {
 @PrimaryGeneratedColumn()
 id_user: number;
 
-@Column({type: 'text'})
+@Column({type: 'text', unique: true})
 nome: string;
 
 @Column({type: 'text'})
 cargo: string;
 
-@Column({type: 'text'})
+@Column({type: 'text', unique: true})
 email: string;
 
-@Column({type: 'text'})
+@Column({type: 'text', unique: true})
 login: string;
 
 @Column({type: 'text'})

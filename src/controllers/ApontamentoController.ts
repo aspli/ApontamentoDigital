@@ -6,21 +6,22 @@ import { userRepository } from "../repositories/userRepository"
 export class ApontamentoController{
 
     async createApontamento(req: Request, res: Response){
-        const { data_apt, total_horas, tarefa_realiza} = req.body;
+        const { data_apt, total_horas, tarefa_realizada} = req.body;
         const { idUser } = req.params;        
         const user = await userRepository.findOneBy({id_user: Number(idUser)});
 
         if(!user){
+            console.log("entrei no erro");
             throw new BabRequestError("Usuário não existe!");        
         }
 
         const newApontamento = apontamentoRepository.create({
             data_apt, 
             total_horas, 
-            tarefa_realiza,
+            tarefa_realizada,
             user
-        });     
-        await apontamentoRepository.save(newApontamento);    
+        });    
+        await apontamentoRepository.save(newApontamento);   
         return res.status(201).json(newApontamento); 
     }
 

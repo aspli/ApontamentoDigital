@@ -20,7 +20,7 @@ data_apt: Date;
 total_horas: number;
 
 @Column({type: 'text'})
-tarefa_realiza: string;
+tarefa_realizada: string;
 
 @ManyToOne(() => User, user => user.apontamentos)
 @JoinColumn({name: 'user_id'})
