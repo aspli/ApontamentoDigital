@@ -9,24 +9,24 @@ import { Apontamento } from "./Apontamento";
 export class User {
 
 @PrimaryGeneratedColumn()
-id_user: number
+id_user: number;
 
 @Column({type: 'text'})
-nome: string
+nome: string;
 
 @Column({type: 'text'})
-cargo: string
+cargo: string;
 
 @Column({type: 'text'})
-email: string
+email: string;
 
 @Column({type: 'text'})
-login: string
+login: string;
 
 @Column({type: 'text'})
-senha: string
+senha: string;
 
 @OneToMany(() => Apontamento, apontamentos => apontamentos.user )
-apontamentos: Apontamento[]
+apontamentos: Apontamento[];
 
 }

@@ -1,9 +1,10 @@
 import {    Column,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
+            Entity,
+            JoinColumn,
+            ManyToOne,
+            PrimaryGeneratedColumn,
 } from "typeorm";
+
 import { User } from "./User";
 
 @Entity('apontamentos')
@@ -19,10 +20,10 @@ data_apt: Date;
 total_horas: number;
 
 @Column({type: 'text'})
-tarefa_realiza: string
+tarefa_realiza: string;
 
 @ManyToOne(() => User, user => user.apontamentos)
 @JoinColumn({name: 'user_id'})
-user : User
+user : User;
 
 } 
