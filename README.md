@@ -6,4 +6,4 @@
 ## Características essenciais: 
 ### Usuários podem se registrar e logar
 ### Registro de apontamento de horas (quem fez e quando fez)
-### Algum endpoint para a empresa pegar um "relatório" das horas por um período de tempo
+### Algum endpoint para a empresa pegar um "relatório" das horas por um período de tempo ...
