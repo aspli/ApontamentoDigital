@@ -2,7 +2,6 @@ import {    Column,
     Entity, 
     OneToMany, 
     PrimaryGeneratedColumn, 
-    Unique
 } from "typeorm";
 import { Apontamento } from "./Apontamento";
 
@@ -29,5 +28,6 @@ senha: string;
 
 @OneToMany(() => Apontamento, apontamentos => apontamentos.user )
 apontamentos: Apontamento[];
+
 
 }

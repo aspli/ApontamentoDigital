@@ -1,12 +1,9 @@
 import { Request, Response } from "express";
-import { BabRequestError, UnauthorizedError } from "../helpers/api-erros";
+import { BabRequestError } from "../helpers/api-erros";
 import { userRepository } from "../repositories/userRepository";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-type JwtPayload = {
-    id: number
-}
  
 export class LoginController{
     async login(req: Request, res: Response){

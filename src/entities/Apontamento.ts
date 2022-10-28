@@ -17,7 +17,7 @@ id_apt: number;
 data_apt: Date;
 
 @Column()
-total_horas: number;
+total_minutos: number;
 
 @Column({type: 'text'})
 tarefa_realizada: string;

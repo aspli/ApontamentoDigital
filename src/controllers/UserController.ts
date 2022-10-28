@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { BabRequestError, UnauthorizedError } from "../helpers/api-erros";
+import { BabRequestError } from "../helpers/api-erros";
 import { userRepository } from "../repositories/userRepository";
 import bcrypt from 'bcrypt';
-
 
 export class UserController{
     async create(req: Request, res: Response){
@@ -28,6 +27,7 @@ export class UserController{
     }
 
     async list(req: Request, res: Response) {
+        const logged = req.user;
         const users = await userRepository.find({ });
         return res.json(users);
 	}    
