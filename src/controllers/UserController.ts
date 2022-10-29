@@ -27,8 +27,17 @@ export class UserController{
     }
 
     async list(req: Request, res: Response) {
-        const logged = req.user;
         const users = await userRepository.find({ });
         return res.json(users);
 	}    
+
+    async delete(req: Request, res: Response) {
+        const { id_user } = req.body;
+        const userExists = await userRepository.findOneBy({id_user});
+        if (!userExists){
+            throw new BabRequestError('Id inválido!');
+        }
+        await userRepository.delete({id_user});
+        return res.json(userExists);
+	}
 }   

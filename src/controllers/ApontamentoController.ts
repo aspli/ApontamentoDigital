@@ -6,17 +6,29 @@ import { userRepository } from "../repositories/userRepository"
 export class ApontamentoController{
     
     async createApontamento(req: Request, res: Response){ 
-        var loggedUser = req.user;       
-        const { data_apt, total_minutos, tarefa_realizada} = req.body;   
+        var loggedUser = req.user;            
+        const { data_apt, hora_inicial, hora_final, tarefa_realizada} = req.body;     
         const user = await userRepository.findOneBy({id_user: loggedUser.id_user});
 
         if(!user){
             throw new BabRequestError("Usuário não existe!");        
         }
 
+        let hInicial = hora_inicial;
+        let hFinal = hora_final;
+        let intervaloTempo = Number(hInicial.split(':')[0]) > Number(hFinal.split(':')[0])
+                            && Number(hFinal.split(':')[1]) <= Number(hInicial.split(':')[1]);                            
+        if(intervaloTempo){
+            throw new BabRequestError("Intervalo de tempo inválido!"); 
+        }
+
+        let min = Number(hInicial.split(':')[1]) + Number(hFinal.split(':')[1]);
+        let horas = Number(hFinal.split(':')[0]) - Number(hInicial.split(':')[0]);
+        let total_minutos = min + horas*60;
+
         const newApontamento = apontamentoRepository.create({
             data_apt, 
-            total_minutos: total_minutos, 
+            total_minutos, 
             tarefa_realizada,
             user
         });    
@@ -54,4 +66,15 @@ export class ApontamentoController{
 
         return res.json(apontamento);
 	}
+
+    async delete(req: Request, res: Response) {
+        const { id_apt } = req.body;
+        const idExists = await apontamentoRepository.findOneBy({id_apt});
+        if (!idExists){
+            throw new BabRequestError('Id inválido!');
+        }
+        await apontamentoRepository.delete({id_apt});
+        return res.json(idExists);
+	}
+
 }
