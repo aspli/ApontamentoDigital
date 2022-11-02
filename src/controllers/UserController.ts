@@ -28,7 +28,9 @@ export class UserController{
 
     async list(req: Request, res: Response) {
         const users = await userRepository.find({ });
-        return res.json(users);
+        return res.json(users
+            .map(({id_user, nome, cargo, email, login}) => 
+            ({id_user, nome, cargo, email, login})));
 	}    
 
     async delete(req: Request, res: Response) {

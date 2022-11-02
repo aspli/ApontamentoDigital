@@ -13,7 +13,6 @@ export const authMiddleware =async (req:Request, res: Response, next: NextFuncti
         throw new UnauthorizedError('Não autorizado!');
     }
     const token = authorization.split(' ')[1];
-    console.log(token);
 
     const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
 
